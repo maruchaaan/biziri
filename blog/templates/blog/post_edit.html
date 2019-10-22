@@ -1,15 +1,25 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1>New post</h1>
+    <h1>書き言葉ーメール電話のやりとり</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+        <button type="submit" class="save btn btn-default">変換</button>
     </form>
-     <h1>New post</h1>
+     <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">戻る</button>
+    </form>
+    
+     <h1>話し言葉ー電話や上司との会話</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+        <button type="submit" class="save btn btn-default">変換</button>
     </form>
+     <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">戻る</button>
+    </form>
+    
     
 {% endblock %}
