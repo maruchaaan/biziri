@@ -1,6 +1,6 @@
 # coding: utf-8
 import sys
-import MeCab
+sys.path.append('/myvenv/lib/python3.7/site-packages/MeCab')
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post
