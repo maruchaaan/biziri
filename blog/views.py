@@ -18,11 +18,11 @@ def post_detail(request, pk):
 
 def post_new(request):
     if request.method == "POST": 
-        form = PostForm(request.POST)　#request.POSTに投稿が保存されている
+        form = PostForm(request.POST)
         m = MeCab.Tagger ("-Ochasen")
         x=m.parse (form)
         print(x)
-         if form.is_valid():　#投稿の値が有効ならば
+         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
