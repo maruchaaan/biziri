@@ -22,14 +22,14 @@ def post_new(request):
         form = PostForm(request.POST)
         m = MeCab.Tagger ("-Ochasen")
         x=m.parse(form)
-        if form.is_valid():                                     
+      #if form.is_valid():                                     
              post = x.save(commit=False)
              post.author = request.user
              post.published_date = timezone.now()
              post.save()
              return redirect('post_detail', pk=post.pk)                       
-    else:
-        form = PostForm()
+   # else:
+        #form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
 
 def post_edit(request, pk):
