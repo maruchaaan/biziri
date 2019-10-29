@@ -19,14 +19,14 @@ def post_detail(request, pk):
 
 def post_new(request):
     if request.method == "POST": 
-        form = PostForm(request.POST)
-        m = MeCab.Tagger ("-Ochasen")
-        x=m.parse(form)
-        if x.is_valid():
-            post = x.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
+    form = PostForm(request.POST)
+    m = MeCab.Tagger ("-Ochasen")
+    x=m.parse(form)
+    if form.is_valid():
+    post = x.save(commit=False)
+    post.author = request.user
+    post.published_date = timezone.now()
+    post.save()
         return redirect('post_detail', pk=post.pk)
         else:
             form=PostForm()
