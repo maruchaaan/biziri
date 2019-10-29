@@ -24,7 +24,7 @@ def post_new(request):
              post.author = request.user
              post.published_date = timezone.now()
              post.save()
-            return redirect('post_detail', pk=post.pk)
+             return redirect('post_detail', pk=post.pk)                       
         m = MeCab.Tagger ("-Ochasen")
         x=m.parse(form)
         print(x)
