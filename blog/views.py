@@ -1,6 +1,6 @@
 # coding: utf-8
 import sys
-sys.path.append('../blog/myvenv/lib/python3.7/site-packages/MeCab')
+sys.path.append('../blog/myvenv/lib/python3.7/site-packages')
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post
