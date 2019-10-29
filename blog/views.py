@@ -3,6 +3,9 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
+# coding: utf-8
+import sys
+import MeCab
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -14,9 +17,12 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', {'post': post})
 
 def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
+    if request.method == "POST": 
+        form = PostForm(request.POST)　#request.POSTに投稿が保存されている
+        m = MeCab.Tagger ("-Ochasen")
+        x=m.parse (form)
+        print(x)
+         if form.is_valid():　#投稿の値が有効ならば
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
