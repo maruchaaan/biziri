@@ -23,10 +23,10 @@ def post_new(request):
         m = MeCab.Tagger ("-Ochasen")
         x=m.parse(form)
         if x.is_valid():
-        post = x.save(commit=False)
-        post.author = request.user
-        post.published_date = timezone.now()
-        post.save()
+            post = x.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
         return redirect('post_detail', pk=post.pk)
         else:
             x=PostForm()
