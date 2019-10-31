@@ -41,9 +41,3 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 
-def index(request):
-    return render(request, 'blog/index.html', {})
- 
- 
-def table(request):
-    return render(request, 'blog/table.html', {})
