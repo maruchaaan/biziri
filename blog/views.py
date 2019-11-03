@@ -44,3 +44,6 @@ def post_edit(request, pk):
 def apphoge(request):
     return render(request,'blog/hogera.html')
 
+
+
+
