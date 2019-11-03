@@ -10,4 +10,5 @@ urlpatterns = [
     path('apphoge',views.apphoge,name='apphoge'),
     path('',views.index,name='index'),
     path('apphoge/new',views.new,name='new'),
+    path('apphoge/new/speak',views.speak,name='speak'),
 ]
