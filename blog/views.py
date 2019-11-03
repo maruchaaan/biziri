@@ -44,6 +44,18 @@ def post_edit(request, pk):
 def apphoge(request):
     return render(request,'blog/hogera.html')
 
+def index(request):
+    return render(request, 'blog/hoge.html')
+
+def new(request):
+    return render(request, 'blog/new.html')
+
+
+
+
+
+
+
 
 
 
