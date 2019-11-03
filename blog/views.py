@@ -44,11 +44,15 @@ def post_edit(request, pk):
 def apphoge(request):
     return render(request,'blog/hogera.html')
 
+def new(request):
+    return render(request, 'blog/new.html')
+
 def speak(request):
     return render(request, 'blog/hoge.html')
 
-def new(request):
-    return render(request, 'blog/new.html')
+def write(request):
+    return render(request, 'blog/hoge2.html')
+
 
 
 
