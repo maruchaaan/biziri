@@ -1,6 +1,12 @@
-h1{
-    color:#FF66CC;
-    font-size: 40px;
-    font-family: cursive;
+.a1 {
+  background-color:  #98d98e;
+  height: 120px;
+  padding: 20px;
 }
-<a href="https://en.wikipedia.org/wiki/Django" class="external_link" id="link_to_wiki_page">
+.b1 {
+  background-color:  #e4de8a;
+  padding-left: 20px;
+  height: 40px;
+  text-align:left;
+  font-size: 18pt
+}
