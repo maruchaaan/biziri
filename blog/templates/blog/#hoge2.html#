@@ -1,0 +1,13 @@
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <h1><a href="/">書き言葉</a></h1>
+    </head>
+<form>
+        <input type="text"  name="myText1"/>
+        <br>
+        <input type="submit" value="変換"/>
+</form>
+<button onClick="javascript:history.go(-1);">戻る</button>
+</html>
