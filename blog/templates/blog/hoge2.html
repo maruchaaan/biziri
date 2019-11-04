@@ -1,9 +1,9 @@
 <% load static %}
    <html>
-     <head>
        <title>書き言葉</title>
-       <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-       </head>
+        {% block extrahead %}
+      <link href="{% static 'blog.css' %}" rel="stylesheet">
+    {% endblock %}
 <form >
         <input type="text"  name="myText1"/>
         <br>
