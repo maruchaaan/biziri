@@ -1,7 +1,14 @@
-<h1>書き言葉</h1>
+<% load static %}
+   <html>
+     <head>
+       <title>書き言葉</title>
+       <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+       </head>
 <form >
         <input type="text"  name="myText1"/>
         <br>
         <input type="submit" value="変換"/>
-    </form>
+</form>
 <button onClick="javascript:history.go(-1);">戻る</button>
+</html>
+
