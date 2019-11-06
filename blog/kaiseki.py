@@ -3,8 +3,7 @@ import sys
 import cgi
 import io
 
-def result(request):
-    return render(request, 'blog/hoge3.html')
+
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 form = cgi.FieldStorage()
 if 'sentense' not in form:

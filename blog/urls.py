@@ -12,5 +12,5 @@ urlpatterns = [
     path('apphoge/new',views.new,name='new'),
     path('apphoge/new/speak',views.speak,name='speak'),
     path('apphoge/new/write',views.write,name='write'),
-    path('apphoge/new/write/result',kaiseki.result,name='result'),
+    path('apphoge/new/write/result',views.result,name='result'),
 ]
