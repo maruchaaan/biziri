@@ -53,8 +53,7 @@ def speak(request):
 def write(request):
     return render(request, 'blog/hoge2.html')
 
-def result(request):
-    return render(request, 'blog/hoge3.html')
+
 
 
 
