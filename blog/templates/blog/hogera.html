@@ -1,14 +1,14 @@
 <a href="{% url 'pjhoge:apphoge' %}"> </a>
 {% load static %}
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% block extrahead %}{% endblock %}
-</head>
-<body>
- <h1><a href="/">BIZIRI</a></h1>
-<a class="a_more" href="{% url 'new' %}"> >>はじめる </a>
- {% block content %}
-{% endblock %}
-</html>
-</body>
+<html>
+  <head>
+    <title>BIZIRI</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <header>
+ <h1>BIZIRI</h1>
+ <a class="a_more" href="{% url 'new' %}"> >>はじめる </a>
+    </header>
+  </body>
+  </html>

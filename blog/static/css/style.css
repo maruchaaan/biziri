@@ -1,10 +1,6 @@
-h1{
-    color: green;
-}
-
-.circle{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: green;
+header h1 {
+    margin: 0;
+    height: 100%;
+    line-height: 70px;
+    color : green;
 }
