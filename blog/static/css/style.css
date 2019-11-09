@@ -2,6 +2,8 @@ h1 {
     color: #FCA205;
     font-family: 'Lobster';
 }
-body {background-color: #90ee90; }
+body {
+    background-color: #90ee90;
+}
 
 <a href="https://en.wikipedia.org/wiki/Django" class="external_link" id="link_to_wiki_page">
