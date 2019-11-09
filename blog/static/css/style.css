@@ -5,4 +5,9 @@ h1 {
 body {
     padding-left: 50px;
 }
+.page-header {
+    background-color: #ff9400;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
 <a href="https://en.wikipedia.org/wiki/Django" class="external_link" id="link_to_wiki_page">
