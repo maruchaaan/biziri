@@ -10,9 +10,11 @@
 </head>
 <body>
   <h1>BIZIRI</h1>
-   {% block content %}
-   {% endblock %}
- <a class="a_more" href="{% url 'new' %}"> >>はじめる </a>
+   {% block header%}
+  {% endblock header%}
+  {% block content %}
+    {% endblock content %}
+<a class="a_more" href="{% url 'new' %}"> >>はじめる </a>
 </body>
 </html>
    
