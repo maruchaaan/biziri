@@ -1,6 +1,8 @@
-p{
-    margin: 0;
-    height: 100%;
-    line-height: 200px;
-    color: #ffffff;
+h1 a {
+    color: #FCA205;
+    font-family: 'Lobster';
 }
+body {
+    padding-left: 15px;
+}
+<a href="https://en.wikipedia.org/wiki/Django" class="external_link" id="link_to_wiki_page">

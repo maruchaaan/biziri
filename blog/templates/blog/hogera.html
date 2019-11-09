@@ -1,10 +1,18 @@
 <a href="{% url 'pjhoge:apphoge' %}"> </a>
 {% load static %}
-<head>
+<html>
+  <head>
+    <title>BIZIRI</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
- <p>BIZIRI</p>
+  <h1><a href="/">BIZIRI</a></h1>
+   {% block content %}
+   {% endblock %}
  <a class="a_more" href="{% url 'new' %}"> >>はじめる </a>
- </body>
+</body>
+</html>
    
