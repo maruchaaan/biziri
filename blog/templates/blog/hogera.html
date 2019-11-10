@@ -9,10 +9,14 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
   <body>
-    <div>
+    <div class="page-header">
       <h1>BIZIRI</h1>
     </div>
-<a class="a_more" href="{% url 'new' %}"> >>はじめる </a>
+    <a class="a_more" href="{% url 'new' %}"> >>はじめる </a>
+    <div class="content container">
+        {% block content %}
+        {% endblock %}
+	</div>
 </body>
 </html>
    
