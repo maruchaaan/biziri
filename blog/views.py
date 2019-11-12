@@ -3,7 +3,7 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
-
+from .forms import TestForm
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -52,6 +52,15 @@ def speak(request):
 
 def write(request):
     return render(request, 'blog/hoge2.html')
+
+def result(request):
+    return render(request, 'blog/result.html')
+
+
+
+
+
+
 
 
 
