@@ -1,8 +1,15 @@
+{% load static %}
 <h1>謝罪</h1>
-<form>
-     <textarea name="comment" cols="40" rows="8"></textarea>
-        <br>
-        <input type="submit" value="変換"/>
-    </form>
-<button onClick="javascript:history.go(-1);">戻る</button>
+<form action="{%url 'result2'%}" method="get">
+  {% csrf_token %}
+     <textarea name="comment2" cols="40" rows="8"></textarea>
+        <input type="submit" value="変換"/></form>
+<a class="a_more" href="{% url 'apphoge' %}"> <<トップページへ</a><br>
+<a class="a_more" href="{% url 'new' %}"> <<シチュエーション選択へ</a><br>
+{% if comment %}
+<p style="margin-top: 20pt">
+{{comment}}
+</p>
+{% endif %}
+
 

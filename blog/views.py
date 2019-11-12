@@ -59,6 +59,12 @@ def result(request):
         }
     return render(request, 'blog/hoge.html',d)
 
+def result(request):
+    d={
+        'comment2': request.GET.get('comment2')
+        }
+    return render(request, 'blog/hoge2.html',d)
+
 
 
 
