@@ -4,7 +4,8 @@
   {% csrf_token %}
      <textarea name="comment" cols="40" rows="8"></textarea>
         <input type="submit" value="変換"/></form>
-	<a class="a_more" href="{% url 'apphoge' %}"> <<トップページへ</a><br>
+<a class="a_more" href="{% url 'apphoge' %}"> <<トップページへ</a><br>
+<a class="a_more" href="{% url 'new' %}"> <<シチュエーション選択へ</a><br>
 {% if comment %}
 <p style="margin-top: 20pt">
 {{comment}}
