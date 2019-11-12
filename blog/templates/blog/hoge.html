@@ -4,7 +4,7 @@
   {% csrf_token %}
      <textarea name="comment" cols="40" rows="8"></textarea>
         <input type="submit" value="変換"/></form>
-	<button onClick="javascript:history.go(-1);">戻る</button>
+	<button onClick="javascript:history.go(-1);">戻る</button><br>
 {% if comment %}
-{{comment}}<br>
+{{comment}}
 {% endif %}
