@@ -1,7 +1,7 @@
 {% load static %}
 <h1>話し言葉</h1>
-{% csrf_token %}
 <form action="{% url 'result' %}" method="post">
+  {% csrf_token %}
      <textarea name="comment" cols="40" rows="8"></textarea>
         <br>
         <input type="submit" value="変換"/>
