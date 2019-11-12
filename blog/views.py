@@ -54,7 +54,10 @@ def write(request):
     return render(request, 'blog/hoge2.html')
 
 def result(request):
-    return render(request, 'blog/result.html')
+    d={
+        'comment': request.GET.get('comment')
+        }
+    return render(request, 'blog/hoge.html',d)
 
 
 
