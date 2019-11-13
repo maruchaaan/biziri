@@ -3,7 +3,7 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
-from Python.MeCab import MeCab
+from django.MeCab import MeCab
 
 
 def post_list(request):
