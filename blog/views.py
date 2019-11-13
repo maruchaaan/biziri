@@ -74,7 +74,7 @@ mt = MeCab.Tagger("mecabrc")
 str_in=d
 res = mt.parseToNode(str_in)
 dousi=[]
-    while res:
+while res:
     arr = res.feature.split(",")
     
     if (arr[0] == "動詞"):
