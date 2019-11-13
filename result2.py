@@ -1,22 +1,9 @@
-import MeCab
+from natto import MeCab
 import sys
 
-mt = MeCab.Tagger("mecabrc")
-str_in="公園を歩く"
-res = mt.parseToNode(str_in)
+mc = MeCab()
  
-dousi=[]
-while res:
-    arr = res.feature.split(",")
-   
-    if (arr[0] == "動詞"):
-        #動詞の原型を取り出す
-        dousi.append(arr[6])
-        
-    res = res.next
+text = "アルバイト・パート本社は明治４２年創業、大阪中央郵便局内に職員食堂として開業。以後順調に業績を延ばし、全国２０ケ所に営業所を開設している。"
  
-result="動詞 ： {}".format(dousi)
-print(result)
-print(sys.path)
-
+print(mc.parse(text))
 
