@@ -74,7 +74,7 @@ mt = MeCab.Tagger("mecabrc")
 str_in=d
 res = mt.parseToNode(str_in)
 dousi=[]
-while res:
+    while res:
     arr = res.feature.split(",")
     
     if (arr[0] == "動詞"):
@@ -84,4 +84,4 @@ while res:
     res = res.next
     result2="動詞 ： {}".format(dousi)
 
-return render(request, 'blog/hoge2.html',result2)
+    return render(request, 'blog/hoge2.html',result2)
