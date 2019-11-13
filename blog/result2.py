@@ -1,8 +1,12 @@
 import MeCab
+def result2(request):
+    d={
+        'comment2': request.GET.get('comment2')
+        }
+
 
 mt = MeCab.Tagger("mecabrc")
-data="私の好きな食べ物はハンバーグです。今朝、犬と散歩をした。楽しかった。"
-str_in=data
+str_in=d
 res = mt.parseToNode(str_in)
  
 dousi=[]
@@ -14,6 +18,7 @@ while res:
         dousi.append(arr[6])
         
     res = res.next
- 
 
-print("動詞 ： {}".format(dousi))
+    result2="動詞 ： {}".format(dousi)
+
+  return render(request, 'blog/hoge2.html',result2)

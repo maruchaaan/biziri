@@ -1,8 +1,8 @@
 import MeCab
 
+
 mt = MeCab.Tagger("mecabrc")
-data="私の好きな食べ物はハンバーグです。今朝、犬と散歩をした。楽しかった。"
-str_in=data
+str_in="公園を歩く"
 res = mt.parseToNode(str_in)
  
 dousi=[]
@@ -15,5 +15,6 @@ while res:
         
     res = res.next
  
+result="動詞 ： {}".format(dousi)
+print(result)
 
-print("動詞 ： {}".format(dousi))
