@@ -83,6 +83,7 @@ while res:
         
     res = res.next
     result2="動詞 ： {}".format(dousi)
+
 return render(request, 'blog/hoge2.html',result2)
 
 
@@ -104,3 +105,4 @@ return render(request, 'blog/hoge2.html',result2)
 
 
 
+　
