@@ -12,6 +12,6 @@ urlpatterns = [
     path('apphoge/new/speak',views.speak,name='speak'),
     path('apphoge/new/write',views.write,name='write'),
     path('apphoge/new/speak/result',views.result,name='result'),
-    path('apphoge/new/write/result2',result2.result2,name='result2'),
+    path('apphoge/new/write/result2',views.result2,name='result2'),
     
 ]
