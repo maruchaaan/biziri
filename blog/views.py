@@ -4,6 +4,7 @@ from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
 from natto import MeCab
+import sys,os
 
 
 def post_list(request):
