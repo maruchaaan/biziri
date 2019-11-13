@@ -1,5 +1,5 @@
 import MeCab
-
+import sys
 
 mt = MeCab.Tagger("mecabrc")
 str_in="公園を歩く"
@@ -17,4 +17,6 @@ while res:
  
 result="動詞 ： {}".format(dousi)
 print(result)
+print(sys.path)
+
 
