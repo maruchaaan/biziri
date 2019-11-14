@@ -1,3 +1,4 @@
+# coding: utf-8
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post
@@ -72,7 +73,7 @@ def result2(request):
     d={
         'comment2': request.GET.get('comment2')
     }
-    mt = MeCab.Tagger("")
+    mt = MeCab.Tagger("-Ochasen")
     str_in=d
     res = mt.parseToNode(str_in)
     dousi=[]
