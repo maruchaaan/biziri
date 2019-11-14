@@ -72,7 +72,7 @@ def result2(request):
     d={
         'comment2': request.GET.get('comment2')
     }
-    mt = MeCab("-Owakati")
+    mt = MeCab.tagger("-Owakati")
     str_in=d
     res = mt.parseToNode(str_in)
     dousi=[]
