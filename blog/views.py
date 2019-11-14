@@ -76,7 +76,7 @@ def result2(request):
     }
     mt = MeCab.Tagger("-Ochasen")
     str_in=d
-    res = mt.parseToNode(str_in)
+    res = mt.parseToNode(request.GET.get('comment2'))
     dousi=[]
     while res:
       arr = res.feature.split(",")
