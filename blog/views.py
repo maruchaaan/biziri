@@ -4,7 +4,7 @@ from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
 import sys,os
-import Mecab as mcb
+import MeCab as mcb
 
 
 
