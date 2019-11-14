@@ -4,7 +4,7 @@ from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
 import sys,os
-import MeCab
+import Mecab as mcb
 
 
 
@@ -72,7 +72,7 @@ def result2(request):
     d={
         'comment2': request.GET.get('comment2')
     }
-    mt = MeCab("-Owakati")
+    mt = mcb.Tagger()
     str_in=d
     res = mt.parseToNode(str_in)
     dousi=[]
