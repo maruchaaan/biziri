@@ -1,4 +1,5 @@
 # coding: utf-8
+# from natto import MeCab
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post
