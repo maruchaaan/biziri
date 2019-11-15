@@ -71,12 +71,10 @@ def result3(request):
     return render(request, 'blog/hoge2.html',d)
 
 def result2(request):
-    d={
-        'comment2': request.GET.get('comment2')
-    }
-    mt = MeCab.Tagger('mecabrc')
+    d=request.GET.get('comment2')
+    mt = MeCab.Tagger("-Ochasen")
     str_in=d
-    res = mt.parseToNode(str_id)
+    res = mt.parseToNode(str_in)
     dousi=[]
     while res:
       arr = res.feature.split(",")
@@ -88,4 +86,4 @@ def result2(request):
       res = res.next
       result2="動詞 ： {}".format(dousi)
 
-    return render(request, 'blog/hoge2.html',result2)
+    return render(request, 'blog/hoge2.html',{'comment2':result2})
