@@ -74,9 +74,9 @@ def result2(request):
     d={
         'comment2': request.GET.get('comment2')
     }
-    mt = MeCab.Tagger("-Ochasen")
+    mt = MeCab.Tagger('mecabrc')
     str_in=d
-    res = mt.parseToNode(request.GET.get('comment2'))
+    res = mt.parseToNode(str_id)
     dousi=[]
     while res:
       arr = res.feature.split(",")
