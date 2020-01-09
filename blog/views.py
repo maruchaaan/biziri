@@ -1,5 +1,6 @@
 # coding: utf-8
 # from natto import MeCab
+
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post
@@ -7,6 +8,11 @@ from .forms import PostForm
 from django.shortcuts import redirect
 import sys,os
 import MeCab
+import re
+import csv
+import sys
+from blog import mecab_test7
+
 
 
 
@@ -49,41 +55,47 @@ def post_edit(request, pk):
 def apphoge(request):
     return render(request,'blog/hogera.html')
 
-def new(request):
-    return render(request, 'blog/new.html')
+#def new(request):
+    #return render(request, 'blog/new.html')
 
-def speak(request):
-    return render(request, 'blog/hoge.html')
+#def speak(request):
+    #return render(request, 'blog/hoge.html')
 
 def write(request):
     return render(request, 'blog/hoge2.html')
 
-def result(request):
-    d={
-        'comment': request.GET.get('comment')
-    }
-    return render(request, 'blog/hoge.html',d)
-
-def result3(request):
-    d={
-        'comment2': request.GET.get('comment2')
-    }
-    return render(request, 'blog/hoge2.html',d)
+#def result(request):
+    #d={
+        #'comment':request.GET.get('comment')
+   # }
+    #print(d)
+    #return render(request, 'blog/hoge.html',d)
 
 def result2(request):
-    d=request.GET.get('comment2')
-    mt = MeCab.Tagger("-Ochasen")
-    str_in=d
-    res = mt.parseToNode(str_in)
-    dousi=[]
-    while res:
-      arr = res.feature.split(",")
-    
-      if (arr[0] == "動詞"):
-        #動詞の原型を取り出す
-        dousi.append(arr[6])
-        
-      res = res.next
-      result2="動詞 ： {}".format(dousi)
+    d={
+        'comment2':request.GET.get('comment2')
+        }
+    if(request.GET.get('comment2')=="1"):
+     return render(request, 'blog/hoge3.html')
+    print(request.GET.get('comment2'))
+    f=open('data_sentence.txt','a',encoding="utf-8")
+    f.write("入力文："+request.GET.get('comment2')+"\n")
+    output_text=mecab_test7.mecab(request.GET.get('comment2'))
+    f.write("出力文："+output_text+"\n")
+    f.close()
+    f=open('data_sentence.txt','r',encoding="utf-8")
+    data=f.read()
+    f.close()
 
-    return render(request, 'blog/hoge2.html',{'comment2':result2})
+    
+    print(output_text)
+   
+    return render(request, 'blog/hoge2.html',{'comment2':data})
+
+def delete2(request):
+    if request.method == 'POST':
+        f=open('data_sentence.txt','w',encoding="utf-8")
+        f.write("")
+        f.close()
+    return render(request, 'blog/hoge2.html')
+        

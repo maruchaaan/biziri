@@ -1,15 +1,27 @@
-{% load static %}
-<h1>謝罪</h1>
-<form action="{%url 'result2'%}" method="get">
+<html>
+  <head>
+    {% load static %}
+  </head>
+  <body bgcolor="#33CCFF">
+    <div style="margin-top:200px;">
+</div>
+    <form action="{%url 'result2'%}" method="get">
+<font color="#000000">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;一文ずつ敬語翻訳をします。<br />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;文を入力してください。<br>
   {% csrf_token %}
-     <textarea name="comment2" cols="40" rows="8"></textarea>
-        <input type="submit" value="変換"/></form>
-<a class="a_more" href="{% url 'apphoge' %}"> <<トップページへ</a><br>
-<a class="a_more" href="{% url 'new' %}"> <<シチュエーション選択へ</a><br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;     <textarea name="comment2" cols="40" rows="8"></textarea>
+<input type="submit" value="変換"></form><form action="{%url 'delete2'%}" method="post"></input>
+  {% csrf_token %}
+   <div style="margin-top:20px;"></div>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" name="delete2" value="クリア">
+</form>
+</br><a class="a_more" href="{% url 'apphoge' %}"> <<トップページへ</a><br>
 
-<p style="margin-top: 20pt">
+  <p style="margin-top: 20pt">
 {{comment2}}
 </p>
+
+</html>
+
 
 
 

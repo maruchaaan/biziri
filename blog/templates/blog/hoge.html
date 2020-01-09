@@ -1,6 +1,7 @@
 {% load static %}
-<h1>お礼</h1>
+
 <form action="{%url 'result'%}" method="get">
+<p style="text-align: center"> <font color="#FF99000">一文ずつ敬語翻訳をします。<br />文を入力してください。<br>
   {% csrf_token %}
      <textarea name="comment" cols="40" rows="8"></textarea>
         <input type="submit" value="変換"/></form>
