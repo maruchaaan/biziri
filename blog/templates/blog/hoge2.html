@@ -9,14 +9,15 @@
 <font color="#000000">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;一文ずつ敬語翻訳をします。<br />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;文を入力してください。<br>
   {% csrf_token %}
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;     <textarea name="comment2" cols="40" rows="8"></textarea>
-<input type="submit" value="変換"></form><form action="{%url 'delete2'%}" method="post"></input>
+<input type="submit" value="決定"></form><form action="{%url 'delete2'%}" method="post"></input>
   {% csrf_token %}
    <div style="margin-top:20px;"></div>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" name="delete2" value="クリア">
 </form>
-</br><a class="a_more" href="{% url 'apphoge' %}"> <<トップページへ</a><br>
+</br><a class="a_more" href="{% url 'apphoge' %}"> <<トップページへ</a><br>						       
 
-  <p style="margin-top: 20pt">
+    <p style="margin-top: 20pt">
+{{result2}}
 {{comment2}}
 </p>
 

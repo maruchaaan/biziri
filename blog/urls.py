@@ -15,5 +15,6 @@ urlpatterns = [
     path('apphoge/write/result2',views.result2,name='result2'),
     path('apphoge/write/delete2', views.delete2,name='delete2'),
     
+ 
 
 ]

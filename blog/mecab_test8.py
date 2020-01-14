@@ -5,7 +5,6 @@ import re
 import csv
 from blog import Text_input
 
-
 # Execute bunkai.形態素解析
 #　input_text:解析したいテキスト
 def mecab_wakati(input_text):
@@ -33,6 +32,35 @@ def mecab_wakati(input_text):
 
         node = node.next
     return word_class
+
+def sub_request(list):
+    #自立動詞の数だけ動作主をリクエストする
+    v_count = 0 #動詞カウント
+    index = 0
+    sub_list = {} #主語属性のリスト[key(index):value(1 or  2 or 3)]
+    for w in list:
+        if w[1] == 31:
+            v_count += 1
+            print(w[0],"この動詞の主語は客先や上司ですか？ (Yes/No)")
+            
+            u_answer = input(">>>>>")
+            if u_answer == "Yes": #尊敬語
+                sub_list[index] = 1
+            else:
+                print(w[0],"この動詞の主語は自分もしくは自社ですか？　(Yes/No)")
+                u_answer = input(">>>>>")
+                if u_answer == "Yes": #謙譲語
+                    sub_list[index] = 2
+                else: #丁寧語
+                    sub_list[index] = 3
+        else:
+            index += 1
+            continue
+
+        index += 1
+    #forループ終了
+    return sub_list
+
 
 #主語があるとき、主語で尊敬語か謙譲語か丁寧語か判断する
 #subject: string 特定された主語
@@ -68,19 +96,29 @@ def sub_hit(list):
     return sub_list
 
 # 動詞を敬語動詞に　行く→伺う、行く→いらっしゃる
-# 動詞は主語の属性に応じた変換を行う
+# 動詞は主語の属性に応じた変換を行う.特殊変換
 #conv_v:敬語変換後の動詞
 #word_class_v:変換したい動詞(単語,品詞情報など含む)
 #変更点(11/21) i:主語の属性 1=尊敬語、2=謙譲語、その他は3=丁寧語
 def verb_conv(word_class_v,i):
+    v_candidate = []
     csvfile = '/Users/k20160322k/Desktop/djangogirls/blog/keigo1.csv'
     with open(csvfile,"r", encoding="utf-8") as f:
         header = next(f)
         for line in f:
             dic = line.split(',')
             if dic[0]==word_class_v[6]: #一致するデータあり
-                return dic[i]
-    return False
+                vc_flag = False
+                for v in v_candidate:
+                    if v == dic[i]:
+                        vc_flag = True #既出の敬語
+                    else: continue
+                if vc_flag == False: #被ってなかった場合、追加
+                    v_candidate.append(dic[i])
+    if not v_candidate: #データがなかった場合
+        return False
+    else:
+        return v_candidate
 
 #動詞活用形の変換 いらっしゃる→いらっしゃり
 #v_form:変更後の活用形 連用形など
@@ -89,6 +127,7 @@ def verb_conv(word_class_v,i):
 def verb_form(v_form,v_str):
     result = "verb_form/error"
     csvfile = '/Users/k20160322k/Desktop/djangogirls/blog/Verb.csv'
+    #print(v_form,v_str)
     with open(csvfile,"r",encoding="utf-8") as f:
         for line in f:
             dic = line.split(',')
@@ -121,7 +160,7 @@ def verb_form_henkaku(v_spe,v_form,v_str):
 #verb:調べたい動詞
 def td_verb(verb):
     csvfile = '/Users/k20160322k/Desktop/djangogirls/blog/Verb.csv'
-    f = open("Verb.csv","r",encoding="utf-8")
+    f = open(csvfile,"r",encoding="utf-8")
     for line in f:
         dic = line.split(',')
         if(dic[10] == verb and dic[9] == "連用タ接続" ):
@@ -197,38 +236,33 @@ def noun_bikago(n_word,input_text):
     else:f1.close()
     return False
 
-def question():
-    question="主語は誰ですか"
-    return question
 #input_text:入力
 def mecab(input_text):
-
-    
+    print(input_text)
     Ti = Text_input.Text_check(input_text) #文の整形
     input_text = Ti.input_check1()
-
     list = mecab_wakati(input_text)
 
     #output_text:出力
     output_text = ""
 
-    sub_atr=sub_hit(list)  #主語の属性値(1,2,3)リスト
-
+    sub_atr = sub_request(list) #[key(index):value]
+    #sub_atr=sub_hit(list)  #主語の属性値(1,2,3)リスト
+    
     index = 0
     for w in list:
-        if w[1] == 31:#品詞：自立動詞の変換
+        print(w[1])
+        if w[1] == 31:#品詞：自立動詞の変換     
+            f = open("data_sentence2.txt","w",encoding="utf-8")
+            f.write(w[0])
+            f.close()
             print(w[0],w[1],w[4],w[8])
             conv_v = w[6] #その語の基本形.「行く」など
-            if not sub_atr: #主語属性リストが空になってしまった場合
-                print("主語属性リストが空になりました\r")
-                a = sub_hit(list)
-                if not a: #主語なし文章は丁寧属性（3）に
-                    sub_atr.append(3)
-                    print("主語が見つからないので、丁寧語属性を付与します\r")
-                else: #主語あり文章はもっとも最初に出現した主語の属性にする
-                    sub_atr.append(a[0])
-            i = sub_atr.pop()
+            #i = sub_atr.pop()
+            print(w[0],"i="+str(sub_atr.get(index,3)))
+            i = int(sub_atr.get(index,3))
             i = int(i)
+
             verb_flag = False #特殊変換をしたか否か
             text = ""
 
@@ -248,9 +282,23 @@ def mecab(input_text):
                     continue
 
             if i == 1: #尊敬の場合の変換
-                v = verb_conv(w,i)
-                if v != False: #尊敬.特殊型変換に該当
-                    conv_v = v
+                v_list = verb_conv(w,i)
+                if v_list != False: #尊敬.特殊型変換に該当
+                    if len(v_list) > 1: #候補が２つ以上のとき
+                        print("候補が"+str(len(v_list))+"個あります。")
+                        for p in range(len(v_list)):
+                            select_num = p + 1
+                            print(str(select_num) +": "+ str(v_list[p]))
+
+                        u_answer = input("数字(半角で入力)>>>>>")
+                        for p in range(len(v_list)):
+                            if int(u_answer) == (p+1):
+                                conv_v = v_list[p]
+                                break
+                            else: continue
+                    else:
+                        conv_v = v_list[0]
+
                     verb_flag = True
                     print("i=1",conv_v)
                     minlist = mecab_wakati(conv_v)
@@ -261,39 +309,101 @@ def mecab(input_text):
                                 break
                             else:
                                 text += m[0]
-                else: #特殊型変換に該当しない場合.尊敬「お～になる」
+                else: #特殊型変換に該当しない場合.尊敬「お～になる」or「～れる」「～られる」v_list==False
                     s = "verb_nonspec/error"
-                    s = "お"+ verb_form("連用形",w[6]) +"に"
-                    conv_v = "なる"
+
+                    print("候補が2個あります。")
+                    nonspe_list =[] #一般型動詞候補リスト
+                    s1 = "お"+ verb_form("連用形",w[6]) +"に"
+                    conv_v1 = "なる"
+                    nonspe_list.append(s1+conv_v1) #候補1
+                    s2 = ""
+                    conv_v2 = ""
+                    if w[4].startswith('五段'):
+                        s2 = verb_form("未然形",w[6])
+                        conv_v2 = "れる" #「れる」五段、サ変動詞の未然形に接続
+                    elif w[4].startswith('サ変'):
+                        s2 = verb_form_henkaku(w[4],"未然形",w[6])
+                        conv_v2 = "れる" #「れる」
+                    else: #「られる」上一段・下一段・カ変動詞の未然形に接続
+                        s2 = verb_form("未然形",w[6])
+                        conv_v2 = "られる"
+                    nonspe_list.append(s2+conv_v2) #候補2
+
+                    for p in range(len(nonspe_list)): #選択肢表示
+                        select_num = p + 1
+                        print(str(select_num) +": "+ str(nonspe_list[p]))
+
+                    u_answer = input("数字(半角で入力)>>>>>")
+                    if u_answer=="1":
+                        s = s1
+                        conv_v = conv_v1
+                    if u_answer=="2":
+                        s = s2
+                        conv_v = conv_v2
+
                     text += s
+
             elif i==2: #謙譲語(i=2)の場合の変換
-                v = verb_conv(w,i)
-                if v != False:  #謙譲.特殊型変換に該当
-                    conv_v = v
+                v_list = verb_conv(w,i)
+                if v_list != False:  #謙譲.特殊型変換に該当
+                    if len(v_list) > 1: #候補が2つ以上あるとき
+                        print("候補が"+str(len(v_list))+"個あります。")
+                        for p in range(len(v_list)):
+                            select_num = p + 1
+                            print(str(select_num) +": "+ str(v_list[p]))
+                        u_answer = input("数字(半角で入力)>>>>>")
+                        for p in range(len(v_list)):
+                            if int(u_answer) == (p+1):
+                                conv_v = v_list[p]
+                                break
+                            else: continue
+                    else:
+                        conv_v = v_list[0]
+
                     verb_flag = True
                     print("i=2",conv_v)
                     minlist = mecab_wakati(conv_v)
+
                     if len(minlist) != 1: #さらに分解できる語.拝読する.お待ちするなど
-                        #print(minlist[-1])
                         s = ""
                         for m in minlist:
                             if m[0] == minlist[-1][0]:
-                                #print("3",m[0])
                                 conv_v = m[0]
                                 break
                             else:
-                                #print("4",m[0])
                                 text += m[0]
-                else: #謙譲.特殊変換に該当しない場合「お～いたす」？「お(ご)～する」？
-                    s = "お"+ verb_form("連用形",w[6])
-                    conv_v = "いたす"
+                else: #謙譲.特殊変換に該当しない場合.一般型「お～いたす」？「お(ご)～する」？
+                    s = "verb_nonspec/error"
+
+                    print("候補が3個あります。")
+                    nonspe_list =[] #一般型動詞候補リスト
+                    s1 = "お"+ verb_form("連用形",w[6])
+                    conv_v1 = "いたす"
+                    nonspe_list.append(s1+conv_v1) #候補1
+                    s2 = "お"+verb_form("連用形",w[6])
+                    conv_v2 = "する"
+                    nonspe_list.append(s2+conv_v2) #候補2
+                    s3 = ""
+                    conv_v3 = w[6]
+                    nonspe_list.append(s3+conv_v3) #候補3
+
+                    for p in range(len(nonspe_list)): #選択肢表示
+                        select_num = p + 1
+                        print(str(select_num) +": "+ str(nonspe_list[p]))
+
+                    u_answer = input("数字(半角で入力)>>>>>")
+                    if u_answer=="1":
+                        s = s1
+                        conv_v = conv_v1
+                    if u_answer=="2":
+                        s = s2
+                        conv_v = conv_v2
+                    if u_answer=="3":
+                        s = s3
+                        conv_v = conv_v3
+
                     text += s
-                    #if w[5]=="基本形":
-                            #s = verb_form("連用形",w[6])
-                    #else:
-                            #s = w[0]
-                    #if w[5]=="基本形":
-                        #s += "ます"
             else: #丁寧語（i=3）の場合は、処理しない
                 pass
 
@@ -348,7 +458,7 @@ def mecab(input_text):
             output_text += text #動詞変換完了
 
         elif w[1] == 32 or w[1] == 33: #非自立動詞の変換
-            print(w[0],w[1],w[4],w[8])
+            #print(w[0],w[1],w[4],w[8])
             conv_v = w[6] #その語の基本形.
             text = ""
             if w[5]=="基本形" and list[index+1][8] != "名詞" : #後ろが名詞(＝動詞が連体形)でないときは”ます”つける
@@ -399,12 +509,27 @@ def mecab(input_text):
             else:
                 output_text += w[0] #そのまま
 
-        elif w[1] == 59 or w[1] == 38: #品詞：名詞の変換
+        elif w[1] == 59 or w[1] == 38 or w[1] == 36: #品詞：名詞の変換
+
             n_word = noun_conv(w[6],2)
             if n_word != False:
+                i = 3
+                print(w[0]+":","客先もしくは上司の"+w[0]+"ですか？ (Yes/No)")
+                u_answer = input(">>>>>")
+                if u_answer == "Yes": #尊敬語
+                    i = 1
+                else:
+                    print(w[0]+":","自分もしくは自社の"+w[0]+"ですか？　(Yes/No)")
+                    u_answer = input(">>>>>")
+                    if u_answer == "Yes": #謙譲語
+                        i = 2
+                    else: #丁寧語
+                        i = 3
+                n_word = noun_conv(w[6],i)
                 output_text +=  n_word
-            else: #keigo2にデータなし.特殊変換なし
-                n_word =  noun_bikago(w[0],input_text)
+
+            else: #keigo2、keigo3にデータなし.特殊変換がない名詞の場合
+                n_word = noun_bikago(w[0],input_text)
                 if n_word != False:
                     output_text += n_word
                 else: #Falseの場合
@@ -416,6 +541,7 @@ def mecab(input_text):
         index += 1
 
     #forループ終了
-    print(output_text) #出力
     return output_text
+
+
 

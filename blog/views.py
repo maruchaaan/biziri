@@ -11,7 +11,11 @@ import MeCab
 import re
 import csv
 import sys
-from blog import mecab_test7
+from blog import mecab_test8
+#from flask import Flask, render_template
+#app=Flask(__name__)
+#app.debug=True
+
 
 
 
@@ -75,12 +79,19 @@ def result2(request):
     d={
         'comment2':request.GET.get('comment2')
         }
-    if(request.GET.get('comment2')=="1"):
-     return render(request, 'blog/hoge3.html')
+    
     print(request.GET.get('comment2'))
     f=open('data_sentence.txt','a',encoding="utf-8")
-    f.write("入力文："+request.GET.get('comment2')+"\n")
-    output_text=mecab_test7.mecab(request.GET.get('comment2'))
+    f.write("入力文："+request.GET.get('comment2')+"\n")#入力文はテキストファイルに保存
+    f.close()
+    f=open("data_sentence2.txt",'r',encoding="utf-8")
+    data=f.read()
+    f.close()
+    output_text=mecab_test8.mecab(request.GET.get('comment2'))
+    return render(request, 'blog/hoge3.html',{'comment2':data})
+  
+    
+    
     f.write("出力文："+output_text+"\n")
     f.close()
     f=open('data_sentence.txt','r',encoding="utf-8")
@@ -92,10 +103,16 @@ def result2(request):
    
     return render(request, 'blog/hoge2.html',{'comment2':data})
 
+
+
+
+
 def delete2(request):
     if request.method == 'POST':
         f=open('data_sentence.txt','w',encoding="utf-8")
         f.write("")
         f.close()
     return render(request, 'blog/hoge2.html')
-        
+
+
+
