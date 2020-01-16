@@ -1,0 +1,25 @@
+<html>
+new1
+  <head>
+    {% load static %}
+     <title>Biziri3</title>
+  </head>
+  <center>
+  <body bgcolor="#89c3eb">
+      <div style="margin-top:100px;">
+      <h1> <font color="#000000"> <font size="10"> <p style="text-align: center">Biziri</p></font></font><h1></div><br>
+<p style="margin-top: 20pt">
+翻訳した文<br><br>
+ <font size="5">{{comment2 | linebreaksbr }}</font>
+</p> 
+<br><br>
+
+<form action="{%url 'end'%}" method="post"></input>
+{% csrf_token %}
+<div style="margin-top:20px;"></div>
+<input type="submit" name="end" value="おわる">
+</form>
+
+<a class="a_more" href="{% url 'write' %}"> もう一度>></a><br>
+</center>
+</html>

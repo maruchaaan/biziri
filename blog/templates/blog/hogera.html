@@ -1,21 +1,27 @@
 <a href="{% url 'pjhoge:apphoge' %}"> </a>
 <html>
+<center>
   <head>
     {% load static %}
     <title>Biziri</title>
     
   </head>
-  <body bgcolor="#33CCFF">
-    <div style="margin-top:200px;">
+  <body bgcolor="#89c3eb">
+    <div style="margin-top:100px;">
       <h1> <font color="#000000"> <font size="10"> <p style="text-align: center">Biziri</p></font></font><h1></div><br>
     <div style="margin-top:-80px;">
       <h2> <font color="#000000"> <font size="5"> <p style="text-align: center">〜あなたの文を美しくします〜</p></font></font><h2>	  
     <div style="margin-top:-10px;">
-      <h2> <font color="#FF9900"> <font size="5"> <p style="text-align: center">社外向けメール専用システム</p></font></font><h2>
-    <a class="a_more" href="{% url 'write' %}"> <font size="4"> <p style="text-align: center"> >>はじめる</font> </p></a>
+      <h2> <font color="#f08300"> <font size="5"> <p style="text-align: center">ビジネスメール翻訳システム</p></font></font><h2>
+<form action="{%url 'delete2'%}" method="post"></input>
+{% csrf_token %}
+<div style="margin-top:20px;"></div>
+<input type="submit" name="clear" value="はじめる">
+</form>
 {% block content %}
 {% endblock %}
 
 </body>
+</center>
 </html>
 
