@@ -3,10 +3,22 @@ hoge3
 <center>
   <head>
     {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      var verb = "{{word}}";
+      jQuery(
+         function(){
+          jQuery('.text_box:contains("{{word}}")').each(function(){
+        var mojiretsu = jQuery(this).html();
+        jQuery(this).html(mojiretsu.replace(/{{word}}/g,'<span style="color:red; font-weight:bold;">{{word}}</span>'));
+      });
+      });
+    </script>
   </head>
   <body bgcolor="#89c3eb">
-    <form action="{%url 'vote'%}" method="get">
-    <p>{{comment2}}の主語は何ですか</p><br>
+  <form action="{%url 'vote'%}" method="get">
+    <p>入力文：<span class="text_box">{{input_text}}</span></p><br>
+    <p>「{{comment2}}」の主語は何ですか?</p><br>
   {% csrf_token %}
 <input type="radio" name="q1" value="1"> 客先や上司（尊敬）
 <input type="radio" name="q1" value="2"> 自社や自分（謙譲）
@@ -15,5 +27,3 @@ hoge3
 </form>
 </center>
 </html>
-
-    

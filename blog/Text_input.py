@@ -12,15 +12,16 @@ class Text_check:
 
     def input_check1(self):
         text =self.input_text
-        if not (text.endswith('。'+'\n') == True) or (text.endswith('。'+'\r\n') == True):
+        if text.endswith('。') == False:
             text = text + "。"
-            for i in text:
-                let = unicodedata.east_asian_width(i)
-                if let == 'H' or let == 'Na':
-                    print("半角文字が含まれています。")
-                    print("すべて全角で記入してください。")
-                    break
         return text
+
+    def input_check2(self): #半角文字が含まれていないか
+        for i in text:
+            let = unicodedata.east_asian_width(i)
+            if let == 'H' or let == 'Na':
+                return False
+        return True
 
 def main():
     input_text=input("敬語に変換したい文章＞＞")

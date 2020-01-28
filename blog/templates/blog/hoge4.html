@@ -3,19 +3,45 @@ hoge4
 <center>
   <head>
     {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      var verb = "{{word}}";
+      jQuery(
+         function(){
+          jQuery('.text_box:contains("{{word}}")').each(function(){
+        var mojiretsu = jQuery(this).html();
+        jQuery(this).html(mojiretsu.replace(/{{word}}/g,'<span style="color:red; font-weight:bold;">{{word}}</span>'));
+        });
+      });
+    </script>
   </head>
   <body bgcolor="#89c3eb">
   <div style="margin-top:100px;">
-      <h1> <font color="#000000"> <font size="10"> <p style="text-align: center">Biziri</p></font></font><h1></div><br>
+      <h1> <font color="#000000"> <font size="10"> <p style="text-align: center">Biziri</p></font></font></h1></div><br>
       <div style="margin-top:-80px;">
-      <p> <font color="#000000"> <font size="5"> <p style="text-align: center"><br>「」つの候補があります。
-      <br>あなたのシチュエーションに合うものを選択してください。<br></p></font></font></p>	 
-      <p><font size="5">候補一覧<br><br></font></p>
-      <p><font size="3">入力文：</font></p>
-      
+      <p> <font color="#000000"> <font size="5">
+        <p style="text-align: center"><br>
+        <div id="edit_area"><p>
+        <script>
+            var v_list = {{v_list|safe}};
+            var count = v_list.length;
+            var id = document.getElementById("edit_area");
+            id.insertAdjacentHTML("afterbegin","<font size=\"5\">"+count+"つの候補があります。</font><br>");
+        </script></p></div>
+        あなたのシチュエーションに合うものを選択してください。<br></p></font></font></p>
+      <p><font size="4">候補一覧<br></font></p>
+      <div style="text-align: center; margin-left: 0 auto;">
+        <ol type="1" style= "list-style-position: inside; margin-left: 0px; padding-left: 0; display: inline-block;">
+        {% for v in v_list %}
+        <li style="text-align:left">{{ v }}</li>
+        {% endfor %}
+       </ol>
+     </div>
+      <p><font size="3">入力文：<span class="text_box">{{input_text}}</span></font></p>
+
 <form action="{%url 'kouho'%}" method="get">
       <input type="text" name="kouhoname">
       <input type="submit" value="決定">
-</form>
+</form></div></body>
 </center>
 </html>

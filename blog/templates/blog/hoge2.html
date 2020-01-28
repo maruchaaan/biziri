@@ -8,21 +8,15 @@ hoge2
   <body bgcolor="#89c3eb">
     <div style="margin-top:100px;">
       <h1> <font color="#000000"> <font size="10"> <p style="text-align: center">Biziri</p></font></font><h1></div><br>
-      
-<form action="{%url 'result2'%}" method="get">
-<font color="#000000">一文ずつ敬語翻訳をします。<br>文を入力してください。<br>＊動詞がない文の時の対応は「形容詞」と打つと仮段階ででる。<br>
-  {% csrf_token %}
-<textarea name="comment2" cols="40" rows="8"></textarea>
+
+<form action="{%url 'result2'%}" method="GET">
+<font color="#000000">一文ずつ敬語翻訳をします。<br>
+  文を入力してください。<br>
+<p><textarea name="user_input_text" cols="40" rows="8"></textarea></p>
+{% csrf_token %}
 <input type="submit" value="翻訳"></form>
 
-<form action="{%url 'delete2'%}" method="post"></input>
-  {% csrf_token %}
-   <div style="margin-top:20px;"></div>
 </form>
 </center>
 </br><a class="a_more" href="{% url 'apphoge' %}"> <<トップページへ</a><br>
 </html>
-
-
-
-
